@@ -23,29 +23,18 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize,sent_tokenize
 from nltk.stem import PorterStemmer
-nltk.download( 'punkt' )
-nltk.download( 'stopwords' )
 
 def preprocess_text(text):
-	# Tokenize the text into words
 	words = word_tokenize(text)
-	# Remove stopwords and punctuation
 	stop_words= set(stopwords.words( 'english'))
 	filtered_words= [word for word in words if word. lower() not in stop_words and word.isalnum()]
-
-	# Stemming
 	stemmer = PorterStemmer()
-
 	stemmed_words= [stemmer. stem(word) for word in filtered_words]
 	return stemmed_words
-
 def generate_summary(text,num_sentences=3):
 	sentences= sent_tokenize(text)
 	preprocessed_text = preprocess_text(text)
-	# Calculate the frequency of each word
 	word_frequencies =nltk. FreqDist (preprocessed_text)
-
-	# Calculate the score for each sentence based on word frequency
 	sentence_scores ={}
 	for sentence in sentences:
 		for word, freq in word_frequencies.items():
@@ -54,22 +43,22 @@ def generate_summary(text,num_sentences=3):
 					sentence_scores[sentence] = freq
 				else:
 					sentence_scores[sentence]+= freq
-	# Select top N sentences with highest scores
 	summary_sentences= sorted(sentence_scores, key=sentence_scores.get,reverse=True) [ : num_sentences]
-
 	return ' '. join(summary_sentences)
-
-input_file="NLPINTROEX7.txt"
+input_file="E:/Applied AI/Exp-9/TextFile.txt"
 with open(input_file, 'r') as file:
 	input_text = file.read()
 summary = generate_summary(input_text)
-#print("Origina1 Text: ")
-#print (input_text )
+print("Name: Keerthivasan K S\nReg no: 212224230120\n")
+print("Origina1 Text: ")
+print (input_text )
 print( " \nSummary : " )
 print(summary)
 
 ```
 <H3>Output</H3>
+
+<img width="1097" height="415" alt="image" src="https://github.com/user-attachments/assets/74b1d801-11c4-4453-bd8b-95be78b02159" />
 
 
 <H3>Result:</H3>
